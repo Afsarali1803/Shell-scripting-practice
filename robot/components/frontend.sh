@@ -1,6 +1,13 @@
 #!/bin/bash
 
-sudo -su
+USERID=$(uid-u)
+
+if [ $USERID ne 0 ]
+then
+    echo "Its a normal user"
+else 
+    echo "It is root user"
+fi
 
 yum install nginx -y
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
@@ -8,7 +15,7 @@ curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend
 
 
 cd /usr/share/nginx/html
-rm -rf *
+rm -rf * > /
 unzip /tmp/frontend.zip
 mv frontend-main/* .
 mv static/* .
